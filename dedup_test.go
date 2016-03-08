@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hashicorp/consul-template/dependency"
-	"github.com/hashicorp/consul-template/test"
+	"github.com/thermeon/consul-template/dependency"
+	"github.com/thermeon/consul-template/test"
 	"github.com/hashicorp/consul/testutil"
 )
 

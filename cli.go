@@ -12,8 +12,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/hashicorp/consul-template/logging"
-	"github.com/hashicorp/consul-template/watch"
+	"github.com/thermeon/consul-template/logging"
+	"github.com/thermeon/consul-template/watch"
 	"github.com/hashicorp/go-reap"
 )
 

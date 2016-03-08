@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	dep "github.com/hashicorp/consul-template/dependency"
+	dep "github.com/thermeon/consul-template/dependency"
 )
 
 var defaultWatcherConfig = &WatcherConfig{

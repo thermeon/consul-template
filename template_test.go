@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	dep "github.com/hashicorp/consul-template/dependency"
-	"github.com/hashicorp/consul-template/test"
+	dep "github.com/thermeon/consul-template/dependency"
+	"github.com/thermeon/consul-template/test"
 )
 
 func TestNewTemplate_missingPath(t *testing.T) {

@@ -4,9 +4,9 @@ Consul Template
 [![Build Status](http://img.shields.io/travis/hashicorp/consul-template.svg?style=flat-square)][travis]
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
 
-[release]: https://github.com/hashicorp/consul-template/releases
+[release]: https://github.com/thermeon/consul-template/releases
 [travis]: http://travis-ci.org/hashicorp/consul-template
-[godocs]: http://godoc.org/github.com/hashicorp/consul-template
+[godocs]: http://godoc.org/github.com/thermeon/consul-template
 
 This project provides a convenient way to populate values from [Consul][] into the filesystem using the `consul-template` daemon.
 
@@ -921,7 +921,7 @@ $ NAME [INPUT...]
   parsed for output. Be sure to log all errors, debugging messages onto stderr
   to avoid errors when Consul Template returns the value.
 - Always `exit 0` or Consul Template will assume the plugin failed to execute
-- Ensure the empty input case is handled correctly (see [Multi-phase exection](https://github.com/hashicorp/consul-template#multi-phase-execution))
+- Ensure the empty input case is handled correctly (see [Multi-phase exection](https://github.com/thermeon/consul-template#multi-phase-execution))
 - Data piped into the plugin is appended after any parameters given explicitly (eg `{{ "sample-data" | plugin "my-plugin" "some-parameter"}}` will call `my-plugin some-parameter sample-data`)
 
 Here is a sample plugin in a few different languages that removes any JSON keys that start with an underscore and returns the JSON string:
@@ -1283,7 +1283,7 @@ To build and install Consul Template locally, you will need a modern [Go][] (Go 
 First, clone the repo:
 
 ```shell
-$ git clone https://github.com/hashicorp/consul-template.git
+$ git clone https://github.com/thermeon/consul-template.git
 ```
 
 Next, download/update all the dependencies:
@@ -1316,9 +1316,9 @@ Submit Pull Requests and Issues to the [Consul Template project on GitHub][Consu
 
 
 [Consul]: http://consul.io/ "Service discovery and configuration made easy"
-[Releases]: https://github.com/hashicorp/consul-template/releases "Consul Template releases page"
+[Releases]: https://github.com/thermeon/consul-template/releases "Consul Template releases page"
 [HCL]: https://github.com/hashicorp/hcl "HashiCorp Configuration Language (HCL)"
 [Go]: http://golang.org "Go the language"
 [Consul ACLs]: http://www.consul.io/docs/internals/acl.html "Consul ACLs"
 [Go Template]: http://golang.org/pkg/text/template/ "Go Template"
-[Consul Template]: https://github.com/hashicorp/consul-template "Consul Template on GitHub"
+[Consul Template]: https://github.com/thermeon/consul-template "Consul Template on GitHub"
