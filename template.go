@@ -127,6 +127,7 @@ func funcMap(brain *Brain, used, missing map[string]dep.Dependency) template.Fun
 		"regexReplaceAll": regexReplaceAll,
 		"regexMatch":      regexMatch,
 		"replaceAll":      replaceAll,
+		"tagMap":          tagMap,
 		"timestamp":       timestamp,
 		"toLower":         toLower,
 		"toJSON":          toJSON,

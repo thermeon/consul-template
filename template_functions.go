@@ -704,6 +704,22 @@ func split(sep, s string) ([]string, error) {
 	return strings.Split(s, sep), nil
 }
 
+// tagMap is a template func that takes the provided service Tags
+// and produces a map of the key value pairs spilt on =.
+// Only tags that contain = are included
+func tagMap(tags []string) map[string]string {
+	m := map[string]string{}
+
+	for _, t := range tags {
+		if strings.Contains(t, "=") {
+			pair := strings.SplitN(t, "=", 2)
+			m[pair[0]] = pair[1]
+		}
+	}
+
+	return m
+}
+
 // timestamp returns the current UNIX timestamp in UTC. If an argument is
 // specified, it will be used to format the timestamp.
 func timestamp(s ...string) (string, error) {
