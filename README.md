@@ -1,3 +1,14 @@
+Thermeon Fork
+=============
+
+This is a consul-template fork to provide use-case specific features over [consul-template][Consul Template].
+
+All credit goes to [The Hashicorp Consul Template project on GitHub][Consul Template].
+
+Specifically:
+* Added tagMap
+* Added byDomainPath
+
 Consul Template
 ===============
 [![Latest Version](http://img.shields.io/github/release/hashicorp/consul-template.svg?style=flat-square)][release]
@@ -1344,4 +1355,4 @@ Submit Pull Requests and Issues to the [Consul Template project on GitHub][Consu
 [Go]: http://golang.org "Go the language"
 [Consul ACLs]: http://www.consul.io/docs/internals/acl.html "Consul ACLs"
 [Go Template]: http://golang.org/pkg/text/template/ "Go Template"
-[Consul Template]: https://github.com/thermeon/consul-template "Consul Template on GitHub"
+[Consul Template]: https://github.com/hashicorp/consul-template "Consul Template on GitHub"
