@@ -475,6 +475,21 @@ If you omit the datacenter attribute on `tree`, the local Consul datacenter will
 
 #### Helper Functions
 
+##### `byDomainPath`
+Takes the list of services returned from a [`services`](#services) function and creates a map of them by domain and path.
+
+This only acts on services which contain tags in the format:
+* domain=echo.testing.mydomain.com
+* path=/hello
+
+Example structure:
+* echo.testing.mydomain.com
+ * /hello
+   * service 1
+   * service 2
+ * /world
+   * service 3
+
 ##### `byKey`
 Takes the list of key pairs returned from a [`tree`](#tree) function and creates a map that groups pairs by their top-level directory. For example, if the Consul KV store contained the following structure:
 
@@ -743,6 +758,14 @@ This can be combined with chained and piped with other functions:
 ```liquid
 {{key "foo" | toUpper | split "\n" | join ","}}
 ```
+
+##### `tagMap`
+Takes a list of tags (Service.Tags) and returns a map of all the tags which contain an =.
+
+Given ```Tags=domain=echo.mydomain.com,path=/hello```
+Returns:
+* domain = echo.mydomain.com
+* path   = /hello
 
 ##### `timestamp`
 Returns the current timestamp as a string (UTC). If no arguments are given, the result is the current RFC3339 timestamp:

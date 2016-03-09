@@ -427,6 +427,31 @@ func byTag(in interface{}) (map[string][]interface{}, error) {
 	return m, nil
 }
 
+// domainLocationMap takes the tags in the format:
+// SERVICE_TAGS=domain=foo.bar.com,path=/wibble
+// and aggregates them into a map grouped by domain and path.
+// Multiple services may run on one domain/path
+func byDomainPath(services []*dep.CatalogService) map[string]map[string][]*dep.CatalogService {
+	m := map[string]map[string][]*dep.CatalogService{}
+
+	for _, s := range services {
+		tags := tagMap(s.Tags)
+		if d, ok := tags["domain"]; ok {
+			path := "/"
+			if p, ok := tags["path"]; ok {
+				path = p
+			}
+			if _, exists := m[d]; !exists {
+				m[d] = map[string][]*dep.CatalogService{}
+			}
+			m[d][path] = append(m[d][path], s)
+
+		}
+	}
+
+	return m
+}
+
 // contains is a function that have reverse arguments of "in" and is designed to
 // be used as a pipe instead of a function:
 //
