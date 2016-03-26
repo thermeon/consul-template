@@ -8,6 +8,7 @@ All credit goes to [The Hashicorp Consul Template project on GitHub][Consul Temp
 Specifically:
 * Added tagMap
 * Added byDomainPath
+* Changed services to not split content before . into a tag search
 
 Consul Template
 ===============

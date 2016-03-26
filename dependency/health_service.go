@@ -222,8 +222,7 @@ func ParseHealthServices(s ...string) (*HealthServices, error) {
 	}
 
 	re := regexp.MustCompile(`\A` +
-		`((?P<tag>[[:word:]\-.]+)\.)?` +
-		`((?P<name>[[:word:]\-/_]+))` +
+		`((?P<name>[[:word:]\-/_\.]+))` +
 		`(@(?P<datacenter>[[:word:]\.\-]+))?(:(?P<port>[0-9]+))?` +
 		`\z`)
 	names := re.SubexpNames()
@@ -242,7 +241,7 @@ func ParseHealthServices(s ...string) (*HealthServices, error) {
 		}
 	}
 
-	tag, name, datacenter, port := m["tag"], m["name"], m["datacenter"], m["port"]
+	name, datacenter, port := m["name"], m["datacenter"], m["port"]
 
 	if name == "" {
 		return nil, errors.New("name part is required")
@@ -263,7 +262,6 @@ func ParseHealthServices(s ...string) (*HealthServices, error) {
 	sd := &HealthServices{
 		rawKey:       key,
 		Name:         name,
-		Tag:          tag,
 		DataCenter:   datacenter,
 		StatusFilter: filter,
 		stopCh:       make(chan struct{}),
