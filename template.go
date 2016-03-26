@@ -112,6 +112,7 @@ func funcMap(brain *Brain, used, missing map[string]dep.Dependency) template.Fun
 		"byKey":           byKey,
 		"byTag":           byTag,
 		"byDomainPath":    byDomainPath,
+		"withSSLService":  withSSLService,
 		"contains":        contains,
 		"env":             env,
 		"explode":         explode,

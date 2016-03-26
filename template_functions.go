@@ -427,6 +427,26 @@ func byTag(in interface{}) (map[string][]interface{}, error) {
 	return m, nil
 }
 
+func withSSLService(domainServices map[string]map[string][]*dep.CatalogService) map[string]map[string][]*dep.CatalogService {
+
+	for k, d := range domainServices {
+		hasSSL := false
+		for _, l := range d {
+			for _, s := range l {
+
+				tags := tagMap(s.Tags)
+				if _, exists := tags["https"]; exists {
+					hasSSL = true
+				}
+			}
+		}
+		if !hasSSL {
+			delete(domainServices, k)
+		}
+	}
+	return domainServices
+}
+
 // domainLocationMap takes the tags in the format:
 // SERVICE_TAGS=domain=foo.bar.com,path=/wibble
 // and aggregates them into a map grouped by domain and path.
