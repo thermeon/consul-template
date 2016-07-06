@@ -8,6 +8,7 @@ All credit goes to [The Hashicorp Consul Template project on GitHub][Consul Temp
 Specifically:
 * Added tagMap
 * Added byDomainPath
+* Added hasTag
 * Changed services to not split content before . into a tag search
 
 Consul Template
@@ -589,6 +590,19 @@ You can also access deeply nested values:
 ```
 
 Note: You will need to have a reasonable format about your data in Consul. Please see Golang's text/template package for more information.
+
+##### `hasTag`
+Takes a list of services (as may be returned from a [`services`](#services) function) and returns only those services which have the given tag.
+
+This only acts on services which contain tags in the format:
+* domain=echo.testing.mydomain.com
+* path=/hello
+
+```liquid
+{{ range services | hasTag "domain" }}
+# ...
+{{end}}
+```
 
 ##### `in`
 Determines if a needle is within an iterable element.
