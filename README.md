@@ -9,6 +9,7 @@ Specifically:
 * Added tagMap
 * Added byDomainPath
 * Added hasTag
+* Added groupByTag
 * Changed services to not split content before . into a tag search
 
 Consul Template
@@ -590,6 +591,20 @@ You can also access deeply nested values:
 ```
 
 Note: You will need to have a reasonable format about your data in Consul. Please see Golang's text/template package for more information.
+
+##### `groupByTag`
+Takes a list of services (as may be returned from a [`services`](#services) function) and returns a map of them keyed against the provided tag.
+Services which do not have the specified tag are ignored.
+
+This only acts on services which contain tags in the format:
+* domain=echo.testing.mydomain.com
+* path=/hello
+
+```liquid
+{{ range $location, $services := services | groupByTag "path" }}
+# ...
+{{end}}
+```
 
 ##### `hasTag`
 Takes a list of services (as may be returned from a [`services`](#services) function) and returns only those services which have the given tag.
