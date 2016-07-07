@@ -472,6 +472,37 @@ func byDomainPath(services []*dep.CatalogService) map[string]map[string][]*dep.C
 	return m
 }
 
+// hasTag takes an list of services and a tag key
+// and returns services which have a tag with that key
+func hasTag(key string, services []*dep.CatalogService) []*dep.CatalogService {
+	r := []*dep.CatalogService{}
+
+	for _, s := range services {
+		tags := tagMap(s.Tags)
+		if _, exists := tags[key]; exists {
+			r = append(r, s)
+		}
+	}
+
+	return r
+}
+
+// groupByTag takes a list of services and a tag key
+// and returns a map of services, keyed on the tag value
+// services which do not have the specified tag are ignored
+func groupByTag(key string, services []*dep.CatalogService) map[string][]*dep.CatalogService {
+	m := map[string][]*dep.CatalogService{}
+
+	for _, s := range services {
+		tags := tagMap(s.Tags)
+		if v, exists := tags[key]; exists {
+			m[v] = append(m[v], s)
+		}
+	}
+
+	return m
+}
+
 // contains is a function that have reverse arguments of "in" and is designed to
 // be used as a pipe instead of a function:
 //
