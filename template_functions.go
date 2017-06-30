@@ -456,15 +456,19 @@ func byDomainPath(services []*dep.CatalogService) map[string]map[string][]*dep.C
 
 	for _, s := range services {
 		tags := tagMap(s.Tags)
-		if d, ok := tags["domain"]; ok {
-			path := "/"
+		if domains, ok := tags["domain"]; ok {
+			paths := []string{"/"}
 			if p, ok := tags["path"]; ok {
-				path = p
+				paths = p
 			}
-			if _, exists := m[d]; !exists {
-				m[d] = map[string][]*dep.CatalogService{}
+			for _, d := range domains {
+				if _, exists := m[d]; !exists {
+					m[d] = map[string][]*dep.CatalogService{}
+				}
+				for _, p := range paths {
+					m[d][p] = append(m[d][p], s)
+				}
 			}
-			m[d][path] = append(m[d][path], s)
 
 		}
 	}
@@ -496,7 +500,9 @@ func groupByTag(key string, services []*dep.CatalogService) map[string][]*dep.Ca
 	for _, s := range services {
 		tags := tagMap(s.Tags)
 		if v, exists := tags[key]; exists {
-			m[v] = append(m[v], s)
+			for _, w := range v {
+				m[w] = append(m[w], s)
+			}
 		}
 	}
 
@@ -783,13 +789,13 @@ func split(sep, s string) ([]string, error) {
 // tagMap is a template func that takes the provided service Tags
 // and produces a map of the key value pairs spilt on =.
 // Only tags that contain = are included
-func tagMap(tags []string) map[string]string {
-	m := map[string]string{}
+func tagMap(tags []string) map[string][]string {
+	m := map[string][]string{}
 
 	for _, t := range tags {
 		if strings.Contains(t, "=") {
 			pair := strings.SplitN(t, "=", 2)
-			m[pair[0]] = pair[1]
+			m[pair[0]] = append(m[pair[0]], pair[1])
 		}
 	}
 
